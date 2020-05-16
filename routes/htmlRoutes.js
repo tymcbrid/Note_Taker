@@ -1,16 +1,21 @@
-// Includes path to get the correct file path for the html
+// ===============================================================================
+// DEPENDENCIES - We need to include the path package to get the correct file path for our html
+// ===============================================================================
 var path = require("path");
 
 // Allows this module to be exported to the rest of the application
 module.exports = function(app) {
 
 
-// Routes user to the notes.html page
+// ===============================================================================
+// ROUTING
+// ===============================================================================
+
 app.get("/notes", function(req, res) {
    res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
-// Basic route that sends the user first to the AJAX Page
+// If no matching route is found, default to index
 app.get("*", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
 });
