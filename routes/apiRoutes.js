@@ -37,7 +37,7 @@ app.delete("/api/notes/:id", function(req, res) {
     let deleteID = req.params.id;
 
     for (var i = 0; i < noteDB.length; i++) {
-        if (deleteNoteID == noteDB[i].id) {
+        if (deleteID == noteDB[i].id) {
             noteDB.splice(i, 1);
         }
     };
