@@ -26,7 +26,7 @@ app.post("/api/notes", function(req, res) {
   noteDB.push(req.body);
   assignID(noteDB);
 
-fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(jsonData, null, 2), (err) => {
+fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(noteDB, null, 2), (err) => {
     if (err) throw err
 });
   res.json(req.body);
@@ -34,11 +34,21 @@ fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(jsonData, nul
 
 // Receives query parameter containing the ID of a note to delete by reading all notes in the db.json, removing the note with specified ID, and then re-writing the other notes to db.json
 app.delete("/api/notes/:id", function(req, res) {
+    let deleteID = req.params.id;
 
+    for (var i = 0; i < noteDB.length; i++) {
+        if (deleteNoteID == noteDB[i].id) {
+            noteDB.splice(i, 1);
+        }
+    };
+
+    assignID(noteDB);
+    fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(noteDB, null, 2), (err) => {
+        if (err) throw err
+    });
+
+    res.json(deleteID);
 })
-
-
-    
 }
 
 
@@ -47,14 +57,3 @@ function assignID(arr) {
         arr[i].id = i + 1;
     }
 };
-// Receives query parameter containing the ID of a note to retrieve, reads db.json file and returns the note
-// app.get("/api/notes/:id", function(req, res) {
-//   var chosen = req.params.id;
-//   console.log(chosen);
-//   // for (var i = 0; i < notes.length; i++){
-//   //   if (chosen === notes[i].routeName){
-//   //     return res.json(notes[i]);
-//   //   }
-//   // }
-//   // return res.json(false);
-// })
