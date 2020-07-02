@@ -23,8 +23,8 @@ app.use(express.static('public'))
 // ==============================================================================
 // Router - points our server to a series of route files
 // ==============================================================================
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./public/assets/routes/apiRoutes")(app);
+require("./public/assets/routes/htmlRoutes")(app);
 
 
 
