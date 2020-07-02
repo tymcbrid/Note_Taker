@@ -6,7 +6,7 @@ const path = require("path");
 // We are linking our routes to a "data" source.
 // This data source holds the notes
 // ===============================================================================
-const noteDB = require("../db/db.json");
+const noteDB = require("../../../db/db.json");
 
 
 // ===============================================================================
@@ -17,7 +17,7 @@ module.exports = function(app) {
 
 // Reads db.json file and returns all saved notes as JSON
 app.get("/api/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "../db/db.json"));
+    res.sendFile(path.join(__dirname, "../../../db/db.json"));
 })
 
 
@@ -26,7 +26,7 @@ app.post("/api/notes", function(req, res) {
   noteDB.push(req.body);
   assignID(noteDB);
 
-fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(noteDB, null, 2), (err) => {
+fs.writeFile(path.join(__dirname, "../../../db/db.json"), JSON.stringify(noteDB, null, 2), (err) => {
     if (err) throw err
 });
   res.json(req.body);
