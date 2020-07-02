@@ -43,7 +43,7 @@ app.delete("/api/notes/:id", function(req, res) {
     };
 
     assignID(noteDB);
-    fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(noteDB, null, 2), (err) => {
+    fs.writeFile(path.join(__dirname, "../../../db/db.json"), JSON.stringify(noteDB, null, 2), (err) => {
         if (err) throw err
     });
 
